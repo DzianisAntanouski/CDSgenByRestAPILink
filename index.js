@@ -28,4 +28,4 @@ const initialization = async (data) => {
 };
 
 
-initialization("https://jsonplaceholder.typicode.com/users", "users");
+initialization(data);
