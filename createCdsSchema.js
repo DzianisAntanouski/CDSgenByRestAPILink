@@ -26,8 +26,11 @@ const createCdsFiles = (filename, data) => {
 `;
             createCdsFiles(setName, value);
         } else {
-            schema += `  ${key}: ${cdsType}${type === "string" ? `(${value.length + 40})` : ""};
-`;
+            if (key === "id") {
+                schema += `  key ${key}: ${cdsType}${type === "string" ? `(${value.length + 40})` : ""};`;
+            }else {
+                schema += `  ${key}: ${cdsType}${type === "string" ? `(${value.length + 40})` : ""};`;
+            }
         }
     });
 

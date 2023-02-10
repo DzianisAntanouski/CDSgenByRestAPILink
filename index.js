@@ -21,11 +21,12 @@ const initialization = async (data) => {
     console.log("------------fetch installed");
     await npmInstall();
     console.log("------------npm i completed");
-    data.forEach(async (element) => {
-        await require("./module/fetchAndSaveData")(element);
-        console.log("------------dir created");
+    const promises = data.map(async (element) => {
+        return require("./module/fetchAndSaveData")(element);
     });
-    createCdsSchema()
+    await Promise.all(promises);
+    console.log("------------dir created");
+    await createCdsSchema();
 
 };
 
