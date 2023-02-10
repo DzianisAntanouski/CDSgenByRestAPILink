@@ -2,6 +2,7 @@ const npmInstall = require("./module/npmInstall");
 const initializeCds = require("./module/initializeCds")
 const addFetchNode = require("./module/addFetchNode")
 const createCdsSchema = require("./createCdsSchema")
+const createService = require("./module/createService")
 
 const data = [
     {
@@ -27,6 +28,7 @@ const initialization = async (data) => {
     await Promise.all(promises);
     console.log("------------dir created");
     await createCdsSchema();
+    await createService();
 
 };
 

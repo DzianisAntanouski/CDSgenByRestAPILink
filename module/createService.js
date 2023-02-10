@@ -24,7 +24,7 @@ const writeServiceFile = (serviceContent) => {
   })
 }
 
-const createService = async () => {
+module.exports = createService = async () => {
   try {
     const schema = await readSchemaFile()
     // const entities = schema.match(/entity\s[a-zA-Z]+/g)
@@ -42,5 +42,3 @@ const createService = async () => {
     console.error(error)
   }
 }
-
-createService()
