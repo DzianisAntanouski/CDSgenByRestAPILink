@@ -1,6 +1,7 @@
 const npmInstall = require("./module/npmInstall");
 const initializeCds = require("./module/initializeCds")
 const addFetchNode = require("./module/addFetchNode")
+const createCdsSchema = require("./createCdsSchema")
 
 const data = [
     {
@@ -24,7 +25,8 @@ const initialization = async (data) => {
         await require("./module/fetchAndSaveData")(element);
         console.log("------------dir created");
     });
-    
+    createCdsSchema()
+
 };
 
 
