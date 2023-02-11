@@ -3,7 +3,8 @@ const initializeCds = require("./module/initializeCds")
 const addFetchNode = require("./module/addFetchNode")
 const createCdsSchema = require("./createCdsSchema")
 const createService = require("./module/createService")
-const checkAndInstallCdsPackage = require("./module/checkAndInstallCdsPackage")
+const installCDS = require("./module/installCDS")
+const delFetchNode = require("./module/delFetchNode")
 
 const data = [
     // {
@@ -17,7 +18,7 @@ const data = [
 ]
 
 const initialization = async (data) => {
-    await checkAndInstallCdsPackage();
+    await installCDS();
     await initializeCds();
     console.log("------------cds init completed");
     await addFetchNode();
@@ -28,7 +29,9 @@ const initialization = async (data) => {
         return require("./module/fetchAndSaveData")(element);
     });
     await Promise.all(promises);
-    console.log("------------dir created");
+    console.log("------------data created");
+    await delFetchNode();
+    console.log("------------fetch-node pack removed");
     await createCdsSchema();
     await createService();
 
