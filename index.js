@@ -3,12 +3,13 @@ const initializeCds = require("./module/initializeCds")
 const addFetchNode = require("./module/addFetchNode")
 const createCdsSchema = require("./createCdsSchema")
 const createService = require("./module/createService")
+const checkAndInstallCdsPackage = require("./module/checkAndInstallCdsPackage")
 
 const data = [
-    {
-        name: "users",
-        url: "https://jsonplaceholder.typicode.com/users"
-    },
+    // {
+    //     name: "users",
+    //     url: "https://jsonplaceholder.typicode.com/users"
+    // },
     {
         name: "posts",
         url: "https://jsonplaceholder.typicode.com/posts"
@@ -16,6 +17,7 @@ const data = [
 ]
 
 const initialization = async (data) => {
+    await checkAndInstallCdsPackage();
     await initializeCds();
     console.log("------------cds init completed");
     await addFetchNode();
