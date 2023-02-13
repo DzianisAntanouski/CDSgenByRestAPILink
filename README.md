@@ -1,25 +1,7 @@
 # Getting Started
 
-Welcome to your new project.
+Service for creating a CDS service based on a reference to a REST API. 
 
-It contains these folders and files, following our recommended project layout:
-
-File or Folder | Purpose
----------|----------
-`app/` | content for UI frontends goes here
-`db/` | your domain models and data go here
-`srv/` | your service models and code go here
-`package.json` | project metadata and configuration
-`readme.md` | this getting started guide
+The data.json file contains an array, each object of which is a future Entity with a name specified in the name field and data from the url field (this should be a link to a REST API, from which a GET request returns an array of objects).
 
 
-## Next Steps
-
-- Open a new terminal and run `cds watch` 
-- (in VS Code simply choose _**Terminal** > Run Task > cds watch_)
-- Start adding content, for example, a [db/schema.cds](db/schema.cds).
-
-
-## Learn More
-
-Learn more at https://cap.cloud.sap/docs/get-started/.
