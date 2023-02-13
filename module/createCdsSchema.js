@@ -1,8 +1,10 @@
 const fs = require("fs");
 const path = require("path");
 
-const dataFolder = "module/data";
-const dbFolder = "db";
+// const dataFolder = "module/data";
+// const dbFolder = "db";
+const dataFolder = path.join(__dirname, '..', 'module', 'data');
+const dbFolder = path.join(__dirname, '..', 'db');
 
 const oDataTypes = {
     string: "String",
@@ -35,13 +37,14 @@ const createCdsFiles = (filename, data) => {
     });
 
     schema += "}";
-
+    console.log(schema)
+    console.log(dbFolder, '-------1')
     fs.writeFileSync(path.join(dbFolder, `${filename}.cds`), schema);
 };
 
 async function readCdsFiles() {
     try {
-        const folderPath = path.join(__dirname, "db");
+        const folderPath = path.join(__dirname, "..", "db");
         const files = await fs.promises.readdir(folderPath);
 
         const cdsFiles = files.filter((file) => file.endsWith(".cds"));
@@ -61,6 +64,7 @@ async function readCdsFiles() {
 }
 
 const deleteFiles = () => {
+    console.log(dbFolder, '-------2')
     fs.readdirSync(dbFolder).forEach((file) => {
         if (file !== "schema.cds") {
             fs.unlinkSync(path.join(dbFolder, file));

@@ -1,40 +1,36 @@
+const fs = require('fs');
 const npmInstall = require("./module/npmInstall");
 const initializeCds = require("./module/initializeCds")
 const addFetchNode = require("./module/addFetchNode")
-const createCdsSchema = require("./createCdsSchema")
+const addV2Proxy = require("./module/addV2Proxy")
+const createCdsSchema = require("./module/createCdsSchema")
 const createService = require("./module/createService")
 const installCDS = require("./module/installCDS")
-const delFetchNode = require("./module/delFetchNode")
+const createMySrvJsFile = require("./module/createMySrvJsFile")
+const createServerJs = require("./module/createServerJs")
 
-const data = [
-    // {
-    //     name: "users",
-    //     url: "https://jsonplaceholder.typicode.com/users"
-    // },
-    {
-        name: "posts",
-        url: "https://jsonplaceholder.typicode.com/posts"
-    }
-]
 
+const data = JSON.parse(fs.readFileSync("data.json", 'utf-8'));
 const initialization = async (data) => {
     await installCDS();
     await initializeCds();
     console.log("------------cds init completed");
     await addFetchNode();
+    await addV2Proxy();
     console.log("------------fetch installed");
-    await npmInstall();
-    console.log("------------npm i completed");
+    
     const promises = data.map(async (element) => {
         return require("./module/fetchAndSaveData")(element);
     });
     await Promise.all(promises);
     console.log("------------data created");
-    await delFetchNode();
-    console.log("------------fetch-node pack removed");
+    
     await createCdsSchema();
     await createService();
-
+    await createMySrvJsFile();
+    await createServerJs();
+    await npmInstall();
+    console.log(" run command------------npm install && cds watch");
 };
 
 
